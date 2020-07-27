@@ -1,10 +1,22 @@
 import React from 'react';
-import { View } from 'react-native';
+import { useStore } from 'react-redux';
+import PropTypes from 'prop-types';
+import ViewController from './viewController';
+import ViewModel from './viewModel';
 
-// import { Container } from './styles';
+const Main = ({ navigation }) => {
+  const store = useStore((state) => state);
+  const viewModel = new ViewModel(store);
 
-const Main = () => {
-  return <View />;
+  return <ViewController viewModel={viewModel} navigation={navigation} />;
 };
+
+Main.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+Main.options = ViewController.options;
 
 export default Main;
