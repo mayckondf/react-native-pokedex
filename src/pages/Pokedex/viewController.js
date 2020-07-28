@@ -1,14 +1,18 @@
 /* eslint-disable no-use-before-define */
+
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Keyboard } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import PokedexView from './view';
 import { Creators as SharedActions } from '~/store/ducks/shared';
 import PokedexViewModel from './viewModel';
 
-const PokedexViewController = ({ viewModel, navigation }) => {
+const PokedexViewController = ({ viewModel }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const store = useSelector((state) => state);
   const [pokemonList, setPokemonList] = useState([]);
   const [searching, setSearching] = useState(false);
@@ -67,9 +71,6 @@ PokedexViewController.options = {
 
 PokedexViewController.propTypes = {
   viewModel: PropTypes.instanceOf(PokedexViewModel).isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 export default PokedexViewController;

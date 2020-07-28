@@ -1,11 +1,17 @@
+/* eslint-disable no-unused-vars */
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 import ViewMain from './view';
 import { Creators as SharedActions } from '~/store/ducks/shared';
+import MainViewModel from './viewModel';
 
-const MainViewController = ({ navigation }) => {
+const MainViewController = ({ viewModel }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const store = useSelector((state) => state);
 
   const title = 'Esta procurando por algum pokemon?';
@@ -60,9 +66,7 @@ const MainViewController = ({ navigation }) => {
 };
 
 MainViewController.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+  viewModel: PropTypes.instanceOf(MainViewModel).isRequired,
 };
 
 MainViewController.options = {

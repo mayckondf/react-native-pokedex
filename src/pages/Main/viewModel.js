@@ -4,6 +4,10 @@ class MainViewModel {
   constructor(store) {
     this.store = store;
   }
+
+  getRecentPokemons() {
+    return this.store?.pokedex?.recents;
+  }
 }
 
 export default MainViewModel;

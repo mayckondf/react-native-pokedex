@@ -1,14 +1,17 @@
 /* eslint-disable react/forbid-prop-types */
+
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useRoute } from '@react-navigation/native';
 import PokemonView from './view';
 import PokemonAttackModal from '~/components/PokemonAttackModal';
 import { Creators as PokedexActions } from '~/store/ducks/pokedex';
 
-const PokemonViewController = ({ route }) => {
-  const pokemon = route.params?.pokemon;
+const PokemonViewController = () => {
   const dispatch = useDispatch();
+  const route = useRoute();
+
+  const pokemon = route.params?.pokemon;
 
   useEffect(() => {
     dispatch(PokedexActions.addIntoRecents(pokemon));
@@ -66,13 +69,5 @@ PokemonViewController.options = ({ route }) => ({
   title: `${route.params?.pokemon?.name ?? 'Pokemon'}`,
   headerBackTitle: 'Voltar',
 });
-
-PokemonViewController.propTypes = {
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      pokemon: PropTypes.object.isRequired,
-    }),
-  }).isRequired,
-};
 
 export default PokemonViewController;
